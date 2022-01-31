@@ -1,10 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import AuthContext from '../context/Auth/AuthContext';
 import { Link } from 'react-router-dom';
 import SpinContext from '../context/Spin.js/SpinContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(localStorage.getItem("Token")){
+           navigate("/");
+        }
+    }, [])
     const contextAuth = useContext(AuthContext);
     const { getLogin } = contextAuth;
 
