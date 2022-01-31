@@ -7,11 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate();
-    useEffect(() => {
-        if(localStorage.getItem("Token")){
-           navigate("/");
-        }
-    }, [])
+   
     const contextAuth = useContext(AuthContext);
     const { getLogin } = contextAuth;
 
@@ -20,7 +16,11 @@ function Login() {
 
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-
+    useEffect(() => {
+        if(localStorage.getItem("Token")){
+               navigate("/");
+        }
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
     const handleSubmit = (e) => {
         e.preventDefault();
         getLogin(credentials.email, credentials.password);
